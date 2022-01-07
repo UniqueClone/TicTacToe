@@ -41,7 +41,7 @@ def check_win(board):
         return True
     elif board[3] != '-' and board[3] == board[4] and board[3] == board[5]:  # Middle Row
         return True
-    elif board[6] != '-' and board[6] == board[7] and board[3] == board[8]:  # Bottom Row
+    elif board[6] != '-' and board[6] == board[7] and board[6] == board[8]:  # Bottom Row
         return True
     elif board[0] != '-' and board[0] == board[3] and board[0] == board[6]:  # First Column
         return True
@@ -55,9 +55,14 @@ def check_win(board):
         return True
     else:
         return False
+    
+def check_draw(board):
+    if '-' not in board:
+        return True
+    else:
+        return False
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
     board_pieces = ['-', '-', '-',
@@ -65,11 +70,12 @@ if __name__ == '__main__':
                     '-', '-', '-']
 
     winner = False
+    draw = False
     cur_player = 'O'
 
     print_board(board_pieces)
 
-    while not winner:
+    while (not winner) and (not draw):
         if cur_player == 'X':
             cur_player = 'O'
         else:
@@ -80,8 +86,14 @@ if __name__ == '__main__':
         print_board(board_pieces)
 
         winner = check_win(board_pieces)
+        draw = check_draw(board_pieces)
 
-    print("Winner! \'{}\' wins!\n".format(cur_player))
+
+    if winner:
+        print("Winner! \'{}\' wins!\n".format(cur_player))
+
+    else:
+        print("It's a draw! How...boring...\n")
 
     input("Press enter to exit...")
 
